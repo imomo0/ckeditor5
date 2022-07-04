@@ -30,8 +30,15 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 import PictureEditing from '@ckeditor/ckeditor5-image/src/pictureediting';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize';
+import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
+import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
+import Font from '@ckeditor/ckeditor5-font/src/font';
+
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -39,6 +46,7 @@ export default class ClassicEditor extends ClassicEditorBase {}
 ClassicEditor.builtinPlugins = [
 	Essentials,
 	UploadAdapter,
+	Font,
 	Autoformat,
 	Bold,
 	Italic,
@@ -46,6 +54,7 @@ ClassicEditor.builtinPlugins = [
 	CKBox,
 	CKFinder,
 	CloudServices,
+	Clipboard,
 	EasyImage,
 	Heading,
 	Image,
@@ -62,7 +71,11 @@ ClassicEditor.builtinPlugins = [
 	PictureEditing,
 	Table,
 	TableToolbar,
-	TextTransformation
+	TableColumnResize,
+	TableCaption,
+	TextTransformation,
+	Alignment,
+	SimpleUploadAdapter
 ];
 
 // Editor configuration.
@@ -71,6 +84,12 @@ ClassicEditor.defaultConfig = {
 		items: [
 			'heading',
 			'|',
+			'fontSize',
+			'fontFamily',
+			'fontColor',
+			'fontBackgroundColor',
+			'|',
+			'alignment',
 			'bold',
 			'italic',
 			'link',
@@ -97,6 +116,23 @@ ClassicEditor.defaultConfig = {
 			'toggleImageCaption',
 			'imageTextAlternative'
 		]
+	},
+	fontSize: {
+		options: [
+			9,
+			11,
+			13,
+			'default',
+			17,
+			19,
+			21
+		]
+	},
+	fontFamily: {
+		options: [
+			// ...
+		],
+		supportAllValues: true
 	},
 	table: {
 		contentToolbar: [
