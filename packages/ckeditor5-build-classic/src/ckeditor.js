@@ -11,6 +11,11 @@ import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapte
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
+import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
+import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
+import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
+import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
@@ -21,6 +26,8 @@ import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
+import ImageResizeEditing from '@ckeditor/ckeditor5-image/src/imageresize/imageresizeediting';
+import ImageResizeHandles from '@ckeditor/ckeditor5-image/src/imageresize/imageresizehandles';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
@@ -38,6 +45,10 @@ import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
 import Font from '@ckeditor/ckeditor5-font/src/font';
+import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace';
+import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
+import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
+import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 
 
 export default class ClassicEditor extends ClassicEditorBase {}
@@ -50,6 +61,11 @@ ClassicEditor.builtinPlugins = [
 	Autoformat,
 	Bold,
 	Italic,
+	Underline,
+	Strikethrough,
+	Code,
+	Subscript,
+	Superscript,
 	BlockQuote,
 	CKBox,
 	CKFinder,
@@ -62,6 +78,8 @@ ClassicEditor.builtinPlugins = [
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
+	ImageResizeEditing,
+	ImageResizeHandles,
 	Indent,
 	Link,
 	List,
@@ -75,13 +93,37 @@ ClassicEditor.builtinPlugins = [
 	TableCaption,
 	TextTransformation,
 	Alignment,
-	SimpleUploadAdapter
+	SimpleUploadAdapter,
+	FindAndReplace,
+	Highlight,
+	HorizontalLine,
+	TodoList
 ];
 
 // Editor configuration.
 ClassicEditor.defaultConfig = {
 	toolbar: {
 		items: [
+			'undo',
+			'redo',
+			'|',
+			'outdent',
+			'indent',
+			'|',
+			'bulletedList',
+			'numberedList',
+			'todoList',
+			'|',
+			'horizontalLine',
+			'uploadImage',
+			'blockQuote',
+			'insertTable',
+			'mediaEmbed',
+			'|',
+			'findAndReplace',
+			'|',
+			'highlight',
+			'-',
 			'heading',
 			'|',
 			'fontSize',
@@ -90,31 +132,34 @@ ClassicEditor.defaultConfig = {
 			'fontBackgroundColor',
 			'|',
 			'alignment',
+			'|',
 			'bold',
 			'italic',
-			'link',
-			'bulletedList',
-			'numberedList',
-			'|',
-			'outdent',
-			'indent',
-			'|',
-			'uploadImage',
-			'blockQuote',
-			'insertTable',
-			'mediaEmbed',
-			'undo',
-			'redo'
+			'underline',
+			'strikethrough',
+			'code',
+			'subscript',
+			'superscript',
+			'link'
 		]
 	},
 	image: {
+		resizeOptions: [
+			{
+				name: 'resizeImage:original',
+				value: null,
+				icon: 'original'
+			}
+		],
 		toolbar: [
 			'imageStyle:inline',
-			'imageStyle:block',
-			'imageStyle:side',
+			'imageStyle:wrapText',
+			'imageStyle:breakText',
 			'|',
 			'toggleImageCaption',
-			'imageTextAlternative'
+			'imageTextAlternative',
+			'|',
+			'resizeImage:original'
 		]
 	},
 	fontSize: {
@@ -130,7 +175,15 @@ ClassicEditor.defaultConfig = {
 	},
 	fontFamily: {
 		options: [
-			// ...
+			'default',
+			'Arial, Helvetica, sans-serif',
+			'Courier New, Courier, monospace',
+			'Georgia, serif',
+			'Lucida Sans Unicode, Lucida Grande, sans-serif',
+			'Tahoma, Geneva, sans-serif',
+			'Times New Roman, Times, serif',
+			'Trebuchet MS, Helvetica, sans-serif',
+			'Verdana, Geneva, sans-serif'
 		],
 		supportAllValues: true
 	},
@@ -138,7 +191,10 @@ ClassicEditor.defaultConfig = {
 		contentToolbar: [
 			'tableColumn',
 			'tableRow',
-			'mergeTableCells'
+			'mergeTableCells',
+			'|',
+			'tableProperties',
+			'tableCellProperties'
 		]
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
