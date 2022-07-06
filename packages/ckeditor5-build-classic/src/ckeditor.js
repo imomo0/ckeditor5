@@ -29,6 +29,7 @@ import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import ImageResizeEditing from '@ckeditor/ckeditor5-image/src/imageresize/imageresizeediting';
 import ImageResizeHandles from '@ckeditor/ckeditor5-image/src/imageresize/imageresizehandles';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
+import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
@@ -86,6 +87,7 @@ ClassicEditor.builtinPlugins = [
 	ImageResizeEditing,
 	ImageResizeHandles,
 	Indent,
+	IndentBlock,
 	Link,
 	List,
 	MediaEmbed,
@@ -194,6 +196,10 @@ ClassicEditor.defaultConfig = {
 			// Python code blocks will have the default "language-python" CSS class.
 			{ language: 'python', label: 'Python' }
 		]
+	},
+	indentBlock: {
+		offset: 1,
+		unit: 'em'
 	},
 
 	// This value must be kept in sync with the language defined in webpack.config.js.
