@@ -39,6 +39,8 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize';
 import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption';
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
+import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
@@ -49,6 +51,9 @@ import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandrepl
 import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
+import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
+import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
+import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 
 
 export default class ClassicEditor extends ClassicEditorBase {}
@@ -91,57 +96,30 @@ ClassicEditor.builtinPlugins = [
 	TableToolbar,
 	TableColumnResize,
 	TableCaption,
+	TableProperties,
+	TableCellProperties,
 	TextTransformation,
 	Alignment,
 	SimpleUploadAdapter,
 	FindAndReplace,
 	Highlight,
 	HorizontalLine,
-	TodoList
+	TodoList,
+	SpecialCharacters,
+	SpecialCharactersEssentials,
+	CodeBlock
 ];
 
 // Editor configuration.
 ClassicEditor.defaultConfig = {
 	toolbar: {
 		items: [
-			'undo',
-			'redo',
-			'|',
-			'outdent',
-			'indent',
-			'|',
-			'bulletedList',
-			'numberedList',
-			'todoList',
-			'|',
-			'horizontalLine',
-			'uploadImage',
-			'blockQuote',
-			'insertTable',
-			'mediaEmbed',
-			'|',
-			'findAndReplace',
-			'|',
-			'highlight',
+			'undo','redo','|','heading','|','alignment','bold','italic','underline','strikethrough','subscript','superscript','|','link','|','bulletedList','numberedList','todoList',
 			'-',
-			'heading',
-			'|',
-			'fontSize',
-			'fontFamily',
-			'fontColor',
-			'fontBackgroundColor',
-			'|',
-			'alignment',
-			'|',
-			'bold',
-			'italic',
-			'underline',
-			'strikethrough',
-			'code',
-			'subscript',
-			'superscript',
-			'link'
-		]
+			'outdent','indent','|','fontSize','fontFamily','fontColor','fontBackgroundColor','|','code','codeBlock','|',
+			'insertTable','|','horizontalLine','|','uploadImage','mediaEmbed','blockQuote','findAndReplace','highlight','specialCharacters'
+		],
+		shouldNotGroupWhenFull: true
 	},
 	image: {
 		resizeOptions: [
@@ -159,7 +137,7 @@ ClassicEditor.defaultConfig = {
 			'toggleImageCaption',
 			'imageTextAlternative',
 			'|',
-			'resizeImage:original'
+			'resizeImage'
 		]
 	},
 	fontSize: {
@@ -192,11 +170,27 @@ ClassicEditor.defaultConfig = {
 			'tableColumn',
 			'tableRow',
 			'mergeTableCells',
-			'|',
 			'tableProperties',
 			'tableCellProperties'
 		]
 	},
+	codeBlock: {
+		languages: [
+			// Do not render the CSS class for the plain text code blocks.
+			{ language: 'plaintext', label: 'Plain text', class: '' },
+
+			// Use the "php-code" class for PHP code blocks.
+			{ language: 'php', label: 'PHP', class: 'php-code' },
+
+			// Use the "js" class for JavaScript code blocks.
+			// Note that only the first ("js") class will determine the language of the block when loading data.
+			{ language: 'javascript', label: 'JavaScript', class: 'js javascript js-code' },
+
+			// Python code blocks will have the default "language-python" CSS class.
+			{ language: 'python', label: 'Python' }
+		]
+	},
+
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
 };
