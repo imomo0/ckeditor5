@@ -127,6 +127,11 @@ ClassicEditor.defaultConfig = {
 				name: 'resizeImage:original',
 				value: null,
 				icon: 'original'
+			},
+			{
+				name: 'resizeImage:50',
+				value: 50,
+				icon: '50%'
 			}
 		],
 		toolbar: [
