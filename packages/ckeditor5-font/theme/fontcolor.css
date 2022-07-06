@@ -12,3 +12,7 @@
 label.ck.ck-color-grid__label {
 	font-weight: unset;
 }
+
+.ck-editor__editable {
+	height: 100%;
+}
