@@ -17,8 +17,8 @@ import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
 import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
 import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
-import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
+//import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
+//import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import Image from '@ckeditor/ckeditor5-image/src/image';
@@ -72,8 +72,8 @@ ClassicEditor.builtinPlugins = [
 	Subscript,
 	Superscript,
 	BlockQuote,
-	CKBox,
-	CKFinder,
+//	CKBox,
+//	CKFinder,
 	CloudServices,
 	Clipboard,
 	EasyImage,
