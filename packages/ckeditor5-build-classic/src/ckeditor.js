@@ -114,10 +114,10 @@ ClassicEditor.builtinPlugins = [
 ClassicEditor.defaultConfig = {
 	toolbar: {
 		items: [
-			'undo','redo','|','heading','|','alignment','bold','italic','underline','strikethrough','subscript','superscript','|','link','|','bulletedList','numberedList','todoList',
+			'undo','redo','|','heading','|','alignment','|','bold','italic','underline','strikethrough','subscript','superscript','|','link','|','bulletedList','numberedList','todoList',
 			'-',
-			'outdent','indent','|','fontSize','fontFamily','fontColor','fontBackgroundColor','|','code','codeBlock','|',
-			'insertTable','|','horizontalLine','|','uploadImage','mediaEmbed','blockQuote','findAndReplace','highlight','specialCharacters'
+			'outdent','indent','|','fontFamily','fontSize','fontColor','fontBackgroundColor','|','code','codeBlock','|',
+			'insertTable','|','horizontalLine','|','uploadImage','mediaEmbed','blockQuote','|','findAndReplace','highlight','specialCharacters'
 		],
 		shouldNotGroupWhenFull: true
 	},
