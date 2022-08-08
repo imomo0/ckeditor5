@@ -75,7 +75,7 @@ class EsaveSave extends Plugin {
             view.set( {
                 label: 'Lagre',
 				class: '',
-                //icon: imageIcon,
+                //icon: saveIcon,
 				withText: true,
                 tooltip: true,
 				isEsaveSave: true
@@ -161,8 +161,7 @@ ClassicEditor.builtinPlugins = [
 // Editor configuration.
 ClassicEditor.defaultConfig = {
 	toolbar: {
-		items: [ 'esaveSave','|',
-			'undo','redo','|','heading','|','alignment','|','bold','italic','underline','strikethrough','subscript','superscript','|','link','|',
+		items: ['undo','redo','|','heading','|','alignment','|','bold','italic','underline','strikethrough','subscript','superscript','|','link','|',
 			'bulletedList','numberedList','todoList',
 			'-',
 			'outdent','indent','|','fontFamily','fontSize','fontColor','fontBackgroundColor','|','code','codeBlock','|',
