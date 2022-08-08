@@ -55,7 +55,52 @@ import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
 import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
+import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import imageIcon from '@ckeditor/ckeditor5-core/theme/icons/cog.svg';
+//import saveIcon from '@ckeditor/ckeditor5-core/theme/icons/save.svg';
 
+class EsaveSave extends Plugin {
+
+	static get pluginName() {
+		return 'EsaveSave';
+	}
+
+    init() {
+        const editor = this.editor;
+
+        const btn = editor.ui.componentFactory.add( 'esaveSave', locale => {
+            const view = new ButtonView( locale );
+
+            view.set( {
+                label: 'Lagre',
+				class: '',
+                //icon: imageIcon,
+				withText: true,
+                tooltip: true,
+				isEsaveSave: true
+            } );
+
+            // Callback executed once the image is clicked.
+            view.on( 'execute', () => {
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == XMLHttpRequest.DONE) {
+						if(xhr.status == 200) view.class = "";
+					}
+				}
+
+				xhr.open("POST", editor.config._config.simpleUpload.uploadUrl, true);
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.setRequestHeader('unid', editor.config._config.simpleUpload.headers.unid);
+				xhr.send(JSON.stringify({text: editor.getData(), url: editor.config._config.simpleUpload.uploadUrl, unid: editor.config._config.simpleUpload.headers.unid}));
+            }
+			);
+
+            return view;
+        } );
+    }
+}
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -109,14 +154,16 @@ ClassicEditor.builtinPlugins = [
 	TodoList,
 	SpecialCharacters,
 	SpecialCharactersEssentials,
-	CodeBlock
+	CodeBlock,
+	EsaveSave
 ];
 
 // Editor configuration.
 ClassicEditor.defaultConfig = {
 	toolbar: {
-		items: [
-			'undo','redo','|','heading','|','alignment','|','bold','italic','underline','strikethrough','subscript','superscript','|','link','|','bulletedList','numberedList','todoList',
+		items: [ 'esaveSave','|',
+			'undo','redo','|','heading','|','alignment','|','bold','italic','underline','strikethrough','subscript','superscript','|','link','|',
+			'bulletedList','numberedList','todoList',
 			'-',
 			'outdent','indent','|','fontFamily','fontSize','fontColor','fontBackgroundColor','|','code','codeBlock','|',
 			'insertTable','|','horizontalLine','|','uploadImage','mediaEmbed','blockQuote','|','findAndReplace','highlight','specialCharacters'
@@ -198,10 +245,12 @@ ClassicEditor.defaultConfig = {
 		]
 	},
 	indentBlock: {
-		offset: 1,
+		offset: 2,
 		unit: 'em'
 	},
 
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
 };
+
+
