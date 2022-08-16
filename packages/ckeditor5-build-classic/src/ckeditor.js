@@ -28,6 +28,7 @@ import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import ImageResizeEditing from '@ckeditor/ckeditor5-image/src/imageresize/imageresizeediting';
 import ImageResizeHandles from '@ckeditor/ckeditor5-image/src/imageresize/imageresizehandles';
+import ImageResizeButtons from '@ckeditor/ckeditor5-image/src/imageresize/imageresizebuttons';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
@@ -49,7 +50,7 @@ import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleu
 import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
 import Font from '@ckeditor/ckeditor5-font/src/font';
 import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace';
-import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
+//import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
@@ -57,8 +58,9 @@ import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import imageIcon from '@ckeditor/ckeditor5-core/theme/icons/cog.svg';
+//import imageIcon from '@ckeditor/ckeditor5-core/theme/icons/cog.svg';
 //import saveIcon from '@ckeditor/ckeditor5-core/theme/icons/save.svg';
+import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 
 class EsaveSave extends Plugin {
 
@@ -108,6 +110,7 @@ export default class ClassicEditor extends ClassicEditorBase {}
 ClassicEditor.builtinPlugins = [
 	Essentials,
 	UploadAdapter,
+	Base64UploadAdapter,
 	Font,
 	Autoformat,
 	Bold,
@@ -131,6 +134,7 @@ ClassicEditor.builtinPlugins = [
 	ImageUpload,
 	ImageResizeEditing,
 	ImageResizeHandles,
+	ImageResizeButtons,
 	Indent,
 	IndentBlock,
 	Link,
@@ -149,7 +153,7 @@ ClassicEditor.builtinPlugins = [
 	Alignment,
 	SimpleUploadAdapter,
 	FindAndReplace,
-	Highlight,
+//	Highlight,
 	HorizontalLine,
 	TodoList,
 	SpecialCharacters,
@@ -158,6 +162,70 @@ ClassicEditor.builtinPlugins = [
 	EsaveSave
 ];
 
+const colorPallet = [
+	{
+		color: '#000000',
+		label: 'Black'
+	},
+	{
+		color: '#4d4d4d',
+		label: 'Dim grey'
+	},
+	{
+		color: '#999999',
+		label: 'Grey'
+	},
+	{
+		color: '#e6e6e6',
+		label: 'Light grey'
+	},
+	{
+		color: '#ffffff',
+		label: 'White',
+		hasBorder: true
+	},
+	{
+		color: '#e64c4c',
+		label: 'Red'
+	},
+	{
+		color: '#e6994c',
+		label: 'Orange'
+	},
+	{
+		color: '#e6e64c',
+		label: 'Yellow'
+	},
+	{
+		color: '#99e64c',
+		label: 'Light green'
+	},
+	{
+		color: '#4ce64c',
+		label: 'Green'
+	},
+	{
+		color: '#4ce699',
+		label: 'Aquamarine'
+	},
+	{
+		color: '#4ce6e6',
+		label: 'Turquoise'
+	},
+	{
+		color: '#4c99e6',
+		label: 'Light blue'
+	},
+	{
+		color: '#4c4ce6',
+		label: 'Blue'
+	},
+	{
+		color: 'hsl(270, 75%, 60%)',
+		label: '#994ce6'
+	}
+]
+
 // Editor configuration.
 ClassicEditor.defaultConfig = {
 	toolbar: {
@@ -165,7 +233,7 @@ ClassicEditor.defaultConfig = {
 			'bulletedList','numberedList','todoList',
 			'-',
 			'outdent','indent','|','fontFamily','fontSize','fontColor','fontBackgroundColor','|','code','codeBlock','|',
-			'insertTable','|','horizontalLine','|','uploadImage','mediaEmbed','blockQuote','|','findAndReplace','highlight','specialCharacters'
+			'insertTable','|','horizontalLine','|','uploadImage','mediaEmbed','blockQuote','|','findAndReplace','|','specialCharacters'
 		],
 		shouldNotGroupWhenFull: true
 	},
@@ -201,8 +269,13 @@ ClassicEditor.defaultConfig = {
 			'default',
 			17,
 			19,
-			21
-		]
+			21,
+			23,
+			25,
+			27,
+			29
+		],
+		supportAllValues: true
 	},
 	fontFamily: {
 		options: [
@@ -218,6 +291,12 @@ ClassicEditor.defaultConfig = {
 		],
 		supportAllValues: true
 	},
+	fontColor: {
+		colors: colorPallet
+	},
+	fontBackgroundColor: {
+		colors: colorPallet
+	},
 	table: {
 		contentToolbar: [
 			'tableColumn',
@@ -225,7 +304,15 @@ ClassicEditor.defaultConfig = {
 			'mergeTableCells',
 			'tableProperties',
 			'tableCellProperties'
-		]
+		],
+		tableProperties: {
+			borderColors: colorPallet,
+			backgroundColors: colorPallet
+		},
+		tableCellProperties: {
+			borderColors: colorPallet,
+			backgroundColors: colorPallet
+		},
 	},
 	codeBlock: {
 		languages: [
